@@ -1,5 +1,17 @@
 # flush some rubbish to wechat public account
 
+## 思路
+
+0. TODO 收集爆款文章主题词
+1. 自己脑暴提示词
+2. 调用 gemini API 生成文章内容和图片的提示词
+3. 用本地部署的 fooocus 生成主题图
+4. 上传图片到免费图床
+5. 格式化 markdown 为临时网页
+6. 用 selenium 打开浏览器并拷贝
+7. 用 selenium 打开浏览器并完成草稿
+8. TODO 用 appnium 打开公众号助手发布
+
 ## prequisites
 
 ## for mac only now
@@ -19,6 +31,14 @@ https://github.com/rimsila/fooocus-API-pinokio
 ## a standalone chrome
 
 https://developer.chrome.com/blog/chrome-for-testing/
+
+## appnium
+
+```shell
+npm install -g appium
+
+appium driver install uiautomator2
+```
 
 ## config
 
@@ -47,6 +67,11 @@ keep a chrome open, and the wechat page open
 open "./chrome/mac_arm-134.0.6998.35/chrome-mac-arm64/Google Chrome for Testing.app" --args --remote-debugging-port=9222 --user-data-dir=$(pwd)/.chrome --lang=zh-CN
 ```
 
+keep appnium running,
+
+```shell
+export ANDROID_HOME=~/Library/Android/sdk && appium
+```
 
 ```shell
 python flush.py 提示词

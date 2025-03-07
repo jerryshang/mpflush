@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from style import read_md, copy_content
 from image import upload_html_images
 from content import generate_content_by_llama, generate_cover_image, generate_content
-from publish import publish
+from draft import draft
+from pub import publish
 
 ACCOUNT = "articles"
 
@@ -83,5 +84,7 @@ if __name__ == "__main__":
     log("应用自定义样式")
     content = copy_content(html)
     log("发布文章为草稿")
-    publish(title, meta["summary"])
+    draft(title, meta["summary"])
+    log("发布文章")
+    publish(title)
     log("完成")

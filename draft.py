@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 
 
-def publish(title, summary):
+def draft(title, summary):
     options = Options()
     options.binary_location = os.path.join(
         os.path.dirname(os.path.realpath(__file__)),

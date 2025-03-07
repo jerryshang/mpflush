@@ -4,3 +4,4 @@ python-dotenv==1.0.1
 Requests==2.32.3
 selenium==4.29.0
 google-genai==1.4.0
+Appium-Python-Client==4.5.1
