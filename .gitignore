@@ -1,0 +1,6 @@
+__pycache__/
+.chrome/
+articles/
+chrome/
+venv/
+tmp.html

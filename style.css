@@ -1,0 +1,251 @@
+/* Modern Article Stylesheet */
+
+/* Global styles */
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
+  color: #333333;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 1.5rem;
+}
+
+/* Article container */
+article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 2.25rem;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #FF7D00; /* 橙色标题 */
+  text-align: center; /* 标题居中 */
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 2rem;
+  border-bottom: 1px solid #FF7D00; /* 边框颜色也为橙色 */
+  padding-bottom: 0.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1.1rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 2rem; /* 增加段落间距 */
+  font-size: 1.1rem; /* 调大字体 */
+}
+
+/* 移除粗体的橙色样式 */
+strong, b {
+  /* 使用默认颜色 */
+}
+
+/* Links */
+a {
+  color: #4361ee;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+a:hover, a:focus {
+  border-bottom-color: #4361ee;
+}
+
+/* Lists */
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+li > ul, li > ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+/* Code elements */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+  background-color: #f7f7f7;
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+}
+
+pre {
+  background-color: #f7f7f7;
+  padding: 1rem;
+  border-radius: 5px;
+  overflow: auto;
+  margin-bottom: 1.5rem;
+}
+
+pre code {
+  background-color: transparent;
+  padding: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  display: block;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  margin: 1.5rem 0;
+  border-radius: 5px;
+}
+
+figure {
+  margin: 1.5rem 0;
+}
+
+figcaption {
+  font-size: 0.9rem;
+  color: #666666;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #FF7D00; /* 橙色引用块边框 */
+  margin-left: 0;
+  padding-left: 1.5rem;
+  font-style: italic;
+  color: #666666;
+}
+
+/* Horizontal rule */
+hr {
+  border: 0;
+  height: 1px;
+  background-color: #e5e7eb;
+  margin: 3rem 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.5rem;
+}
+
+thead {
+  border-bottom: 2px solid #e5e7eb;
+}
+
+th, td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  font-weight: 600;
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  html {
+    font-size: 93.75%; /* 15px for most browsers */
+  }
+
+  body {
+    padding: 0.75rem;
+  }
+
+  article {
+    padding: 0.75rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.75rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 1.05rem; /* 响应式调整段落字体 */
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 87.5%; /* 14px for most browsers */
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+
+  p {
+    font-size: 1rem; /* 小屏幕上的段落字体 */
+  }
+}
