@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>flush</title>
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="container mx-auto p-4">
+    <h1 class="text-3xl">flush</h1>
+    <p class="mt-4">This is a simple tool to help you flush your draft articles to WeChat public account.</p>
+    <textarea class="w-full h-64 p-2 mt-4 border" placeholder="input your article here"></textarea>
+    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded">Generate</button>
+    <img class="h-full mt-4" src="" alt="your image will appear here" />
+
+  </div>
+</body>
+<script>
+  const button = document.querySelector('button')
+  const textarea = document.querySelector('textarea')
+  const img = document.querySelector('img')
+
+  const prompt = {
+    "prompt": "",
+    "negative_prompt": "",
+    "style_selections": [
+      "Fooocus V2",
+      "Fooocus Photograph",
+      "Fooocus Negative"
+    ],
+    "performance_selection": "Speed",
+    "aspect_ratios_selection": "1024*1024",
+    "image_number": 1,
+    "image_seed": -1,
+    "sharpness": 2,
+    "guidance_scale": 3,
+    "base_model_name": "realisticStockPhoto_v20.safetensors",
+    "refiner_model_name": "None",
+    "refiner_switch": 0.5,
+    "loras": [
+      {
+        "enabled": true,
+        "model_name": "SDXL_FILM_PHOTOGRAPHY_STYLE_V1.safetensors",
+        "weight": 0.25
+      },
+      {
+        "enabled": true,
+        "model_name": "None",
+        "weight": 1
+      },
+      {
+        "enabled": true,
+        "model_name": "None",
+        "weight": 1
+      },
+      {
+        "enabled": true,
+        "model_name": "None",
+        "weight": 1
+      },
+      {
+        "enabled": true,
+        "model_name": "None",
+        "weight": 1
+      }
+    ],
+    "advanced_params": {
+      "adaptive_cfg": 7,
+      "adm_scaler_end": 0.3,
+      "adm_scaler_negative": 0.8,
+      "adm_scaler_positive": 1.5,
+      "black_out_nsfw": false,
+      "canny_high_threshold": 128,
+      "canny_low_threshold": 64,
+      "clip_skip": 2,
+      "controlnet_softness": 0.25,
+      "debugging_cn_preprocessor": false,
+      "debugging_dino": false,
+      "debugging_enhance_masks_checkbox": false,
+      "debugging_inpaint_preprocessor": false,
+      "dino_erode_or_dilate": 0,
+      "disable_intermediate_results": false,
+      "disable_preview": false,
+      "disable_seed_increment": false,
+      "freeu_b1": 1.01,
+      "freeu_b2": 1.02,
+      "freeu_enabled": false,
+      "freeu_s1": 0.99,
+      "freeu_s2": 0.95,
+      "inpaint_advanced_masking_checkbox": true,
+      "inpaint_disable_initial_latent": false,
+      "inpaint_engine": "v2.6",
+      "inpaint_erode_or_dilate": 0,
+      "inpaint_respective_field": 1,
+      "inpaint_strength": 1,
+      "invert_mask_checkbox": false,
+      "mixing_image_prompt_and_inpaint": false,
+      "mixing_image_prompt_and_vary_upscale": false,
+      "overwrite_height": -1,
+      "overwrite_step": -1,
+      "overwrite_switch": -1,
+      "overwrite_upscale_strength": -1,
+      "overwrite_vary_strength": -1,
+      "overwrite_width": -1,
+      "refiner_swap_method": "joint",
+      "sampler_name": "dpmpp_2m_sde_gpu",
+      "scheduler_name": "karras",
+      "skipping_cn_preprocessor": false,
+      "vae_name": "Default (model)"
+    },
+    "save_meta": true,
+    "meta_scheme": "fooocus",
+    "save_extension": "png",
+    "save_name": "",
+    "read_wildcards_in_order": false,
+    "require_base64": false,
+    "async_process": false,
+    "webhook_url": ""
+  }
+
+
+  const timerContainer = document.createElement('div')
+  timerContainer.classList.add('inline-block', 'mr-2')
+  button.parentNode.insertBefore(timerContainer, button)
+  const timer = document.createElement('span')
+  timerContainer.appendChild(timer)
+
+  button.addEventListener('click', async () => {
+    button.disabled = true
+    const start = Date.now()
+    timer.textContent = '0s'
+    const interval = setInterval(() => {
+      timer.textContent = `${Math.round((Date.now() - start) / 1000)}s`
+    }, 1000)
+
+    try {
+      const response = await fetch('http://localhost:8888/v1/generation/text-to-image', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'image/png'
+        },
+        body: JSON.stringify({
+          ...prompt,
+          prompt: textarea.value,
+        })
+      })
+
+      if (!response.ok) {
+        const error = await response.text()
+        alert(`Error: ${error}`)
+      } else {
+        console.log('Image generated successfully', response)
+        const blob = await response.blob()
+        const url = window.URL.createObjectURL(blob)
+        img.src = url
+      }
+    } finally {
+      button.disabled = false
+      clearInterval(interval)
+      timerContainer.remove()
+    }
+  })
+
+</script>
+
+</html>

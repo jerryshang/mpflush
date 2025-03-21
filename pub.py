@@ -27,7 +27,7 @@ def create_android_driver():
 
 def publish(title):
     driver = create_android_driver()
-
+    time.sleep(5)
     el = driver.find_element(by=AppiumBy.XPATH, value='//*[@text="发表"]')
     el.click()
     el = driver.find_element(by=AppiumBy.XPATH, value='//*[@text="草稿"]')

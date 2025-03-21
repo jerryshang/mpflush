@@ -37,11 +37,16 @@ if __name__ == "__main__":
             content, image_prompt = generate_content(
                 prompt="".join(sys.argv[1:]), api_key=os.getenv("GEMINI_API_KEY")
             )
+            with open(os.path.join(base_dir, "gemini.md"), "w") as f:
+                f.write(content)
+
         else:
             log(f"使用 Llama 生成内容：{"".join(sys.argv[1:])}")
             content, image_prompt = generate_content_by_llama(
                 prompt="".join(sys.argv[1:])
             )
+            with open(os.path.join(base_dir, "llama.md"), "w") as f:
+                f.write(content)
 
         log("使用 Fooocus 生成图片")
         image_url = generate_cover_image(image_prompt, base_dir)
